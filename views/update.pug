@@ -1,0 +1,23 @@
+extends layout
+
+block content
+    h1 Update
+
+    if pokemon
+        .row
+            .col-sm-12
+                form#list(method='post', action='/'+pokemon._id)
+                    .form-group
+                        label(for='name') Pokemon name:
+                        input#name.form-control(type='text', name='name', placeholder="Pokemon", required="required", value=pokemon.name)
+                    .form-group
+                        label(for='nickname') Nickname:
+                        input#nickname.form-control(type='text', name='nickname', placeholder="Nickname", required="required", value=pokemon.nickname)
+                    .form-group
+                        label(for='cp') Combat Power:
+                        input#cp.form-control(type='number', name='cp', placeholder="CP", required="required", value=pokemon.combatPower)
+                    .form-group
+                        label(for='hp') HP:
+                        input#hp.form-control(type='number', name='hp', placeholder="HP", required="required", value=pokemon.hp)
+                    .form-group
+                        button#submit(type='submit') Submit
