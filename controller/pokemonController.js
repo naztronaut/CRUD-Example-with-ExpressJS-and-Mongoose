@@ -28,6 +28,13 @@ class PokemonService {
                 return pokemon;
             });
     }
+
+    static delete(id) {
+        return Pokemon.findByIdAndRemove(id)
+            .then((data) => {
+               return data;
+            });
+    }
 }
 
 module.exports.PokemonService = PokemonService;
