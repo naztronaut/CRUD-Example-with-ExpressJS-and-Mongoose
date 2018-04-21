@@ -13,6 +13,7 @@ let db = mongoose.connection;
 db.on('error', (err)=>{console.error(`connection error:${err}`);});
 
 var indexRouter = require('./routes/index');
+let pokemonApi = require('./routes/api/pokemon-api');
 
 var app = express();
 app.use(bodyParser.json());
@@ -29,6 +30,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/api/pokemon', pokemonApi);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
