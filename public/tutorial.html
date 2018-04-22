@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <title>CRUD in ExpressJS   </title>
+    <script type="text/javascript" src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="//stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" />
+</head>
+
+<body>
+	<div class="container-fluid">
+		<div class="jumbotron">
+			<div class="container">
+				<h1>CRUD tutorial</h1>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">
+				<p>This tutorial will teach you to create CRUD API end points using NodeJS, ExpressJS, MongoDB, and Mongoose. </p>
+				<p>This tutorial assumes that you have your application already started and connected to a MongoDB collection. We'll only cover creating the controller and API endpoints in Express.</p>
+			</div>
+		</div>
+	
+		<div class="row">
+			<div class="col-sm-12">
+				<h2>Creating Directories and Files</h2>
+				<p>To start, make sure you create a directory titled <strong>controller</strong> at the root level. And another called <strong>api</strong> within your routes directory.</p>
+				<p>Once the folders are created, inside the /controller directory, create a file called <strong>pokemonController.js</strong>. You can name it anything you want. </p>
+				<p>Inside the /routes/api directory, create a file called <strong>pokemon-api.js</strong>. Again, you can name it anything you want. </p>
+				
+				<h2>Modify app.js </h2>
+				<p>In order for our new api route to be useful, we need to tell our app.js to look for and accept visitors to those routes. In app.js, require the pokemon-api.js file along with your other routs:</p>
+				<img class="img-responsive" src="img/1.png">
+				<p>Then after your indexRouter is defined, tell your app to use the newly created route:</p>
+				<img class="img-responsive" src="img/2.png">
+				
+				<h2>Initialize pokemonController.js</h2>
+				<p>Now that our app routes are set up, we need to tell our new controller to do stuff. We should first apply some basics to the file by telling it to look at our model and to export a custom class as a service:</p>
+				<img src="img/3.png" class="img-responsive">
+				<p>The module exports is exporting this as a service which can be imported into our API file later on.</p>
+				
+				<h2>Create our READ method</h2>
+				<p>Now that we have our controller set up properly, let's write a quick static method to READ all documents within our collection:</p>
+				<img src="img/4.png" class="img-responsive">
+				<p>The <code>listAll()</code> method is using our model to find and return ALL documents within the collection specified in our model. Now we need to tell our API file to call this method.</p>
+				
+				<h2>Initialize pokemon-api.js</h2>
+				<p>Before we write code to call the <code>listAll()</code> method from our controller, let's initialize our API file first. </p>
+				<img src="img/5.1.png" class="img-responsive">
+				<p>The first two lines are creating the ExpressJS router. The next two lines are looking at our Controller and creating a service called <code>pokemonService</code> which we can access for all of our API routes.
+				But before we create our first route, let's add some more code and set the Content-type of our responses as application/json. This will the consumers of our API that all responses sent are in JSON. </p>
+				<img src="img/5.5.png" class="img-responseive">
+				<p>The <code>next()</code> method just tells our script to keep moving after <code>router.use()</code> has completed. Now we create our first API route to GET all of our data.</p>
+				
+				<h2>Access the READ method with our API</h2>
+				<p>Let's create a simple GET method which access the pokemonService and sends a response as a JSOn string. </p>
+				<img src="img/6.png" class="img-responsive">
+			</div>
+		</div>
+	</div>
+</body>
+</html>
