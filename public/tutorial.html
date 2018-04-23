@@ -9,6 +9,22 @@
     <script type="text/javascript" src="//code.jquery.com/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="//code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <link rel="stylesheet" href="//stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" />
+	<style>
+		#footerText {
+			background-color: darkgrey;
+			/*width: auto;*/
+			text-align: center;
+			height: 35px;
+			vertical-align: middle;
+			line-height: 35px;
+			margin: -15px;
+			color: #fff;
+		}
+		
+		#footer {
+			padding-top: 25px;
+		}
+	</style>
 </head>
 
 <body>
@@ -16,6 +32,7 @@
 		<div class="jumbotron">
 			<div class="container">
 				<h1>CRUD tutorial</h1>
+				<p>This tutorial and associated code was written by Nazmus Nasir for CSCI E-31. You can find the code on <a href="https://github.com/nlinux1/cscie31-grad" target="_blank">https://github.com/nlinux1/cscie31-grad</a>.</p>
 			</div>
 		</div>
 	</div>
@@ -45,7 +62,7 @@
 				<img src="img/3.png" class="img-responsive">
 				<p>The module exports is exporting this as a service which can be imported into our API file later on.</p>
 				
-				<h2>Create our READ method</h2>
+				<h2>The READ Controller</h2>
 				<p>Now that we have our controller set up properly, let's write a quick static method to READ all documents within our collection:</p>
 				<img src="img/4.png" class="img-responsive">
 				<p>The <code>listAll()</code> method is using our model to find and return ALL documents within the collection specified in our model. Now we need to tell our API file to call this method.</p>
@@ -58,7 +75,7 @@
 				<img src="img/5.5.png" class="img-responseive">
 				<p>The <code>next()</code> method just tells our script to keep moving after <code>router.use()</code> has completed. Now we create our first API route to GET all of our data.</p>
 				
-				<h2>Access the READ method with our API</h2>
+				<h2>API GET Router</h2>
 				<p>Let's create a simple GET method which access the pokemonService and sends a response as a JSOn string. </p>
 				<img src="img/6.png" class="img-responsive">
 				<p>Let's run the app with <code>npm start</code> if you're using NPM and let's go to the route via http://localhost:3000/api/pokemon. The domain and route can be whatever you specified it to be: </p>
@@ -66,13 +83,13 @@
 				<p>If you already had a document within your collection like I did, you will see data outputted. If you're not using a JSON formatter like I am, you will just see a long JSON string and that's perfectly normal. </p>
 				<p>If you don't have a document yet, let's create one with our POST API!</p>
 				
-				<h2>Our CREATE method</h2>
+				<h2>The CREATE Controller</h2>
 				<p>Now that we know how to read all the documents, let's do the <em>C</em> in our CRUD API.</p>
 				<p>In our Controller, create a new static method called <code>create()</code> which takes an object as a parameter:</p>
 				<img src="img/8.png" class="img-responsive">
 				<p>Our <code>create(obj)</code> method looks for an object sent by the API and creates a new Pokemon object using our model. Then we save the newly created Pokemon object and return its value to our api.</p>
 				
-				<h2>API POST Method</h2>
+				<h2>API POST Router</h2>
 				<p>We need to send some data to our controller from our API, but we need to receive the data using the POST method. In our pokemon-api.js file, create a new route with the post method as shown:</p>
 				<img src="img/9.png" class="img-responsive">
 				<p>The <code>item</code> object reads the request and assigns the values sent in the body of the request to the four properties that our model specifies. We then send the item to our <code>pokemonService.create()</code>
@@ -85,9 +102,48 @@
 				<p>You can also use your browser to test and make s ure the new document now shows up.</p>
 				<img src="img/12.png" class="img-responsive">
 				
+				<h2>The UPDATE Controller</h2>
+				<p>We're now ready to create our UPDATE method in our controller. Unlike the POST method which looks for an object as an argument, the UPDATE method will also need an _id parameter so that we target the correct document in our collection.</p>
+				<img src="img/13.png" class="img-responsive">
+				<p>The <code>change()</code> method uses the ID to find one document from our collection. It then sets the data object received and saves it. Once completed, it returns everything to the API. Let's call it.</p>
 				
+				<h2>API PUT Router</h2>
+				<p>Our PUT method in our API file will receive a request via PUT to change one specific document in our MongoDB Collection. The method will then call the <code>static change()</code> method in our
+					controller to make the change and output the changed object in JSON.</p>
+				<p>The PUT request looks very similar to our POST request. The only difference is that the route is looking for a <code>:pokemonid</code> which is the MongoDB auto-assigned ID for that specific document.
+					The other slight difference is that when calling our controller method, we send in an id along with the object data.</p>
+				<img src="img/14.png" class="img-responsive">
+				<p>If our PUT request is successful, the response will send the stringified JSON of the returned object.</p>
+				
+				<h2>Testing our PUT API</h2>
+				<p>Just like our POST, we can test the PUT API in Postman. Our setup will look very similar. Wee're sending the same data with the exception of passing the ID in the URL. You can get the ID from a GET call if you're wondering where I got my id.</p>
+				<img src="img/15.png" class="img-responsive">
+				<p>The API request will return a response containing the changed data if accepted. You can verify again with a GET call or by refreshing your browser. </p>
+				
+				<h2>The DELETE Controller</h2>
+				<p>We finish this example with the DELETE controller, the last piece left of our CRUD application.  The DELETE is fairly easy, you just need to pass in the ID that needs to be removed and use the Mongoose method <code>.findByIdAndRemove()</code>.</p>
+				<img src="img/17.png" class="img-responsive">
+				<p>Once deleted, the method sends the deleted data back as confirmation.</p>
+				
+				<h2>API DELETE Router</h2>
+				<p>Setting up the DELETE router is also simple. Just like the PUT router, we need to send in the ID that needs to be deleted, but this time, we don't need to send a ny other data.</p>
+				<img src="img/18.png" class="img-responsive">
+				<p>If successful, it sends a response with the stringified JSON object that was deleted.</p>
+				
+				<h2>Testing our DELETE API</h2>
+				<p>Testing the DELETE API is as easy as changing your Postman request to DELETE, and sending in the API URL with the ID at the end. No need to send any headers or body or anything else. If successful, the response will be the deleted object.</p>
+				<img src="img/19.png" class="img-responsive">
+				<p>You can also test the delete by either using a GET request or refreshing your browser to confirm that the document has been deleted.</p>
+				
+				<h2>That's CRUD</h2>
+				<p>See the code on <a href="https://github.com/nlinux1/cscie31-grad" target="_blank">https://github.com/nlinux1/cscie31-grad</a>.</p>
 			</div>
 		</div>
+	</div>
+	<div class="container-fluid">
+				<div id="footer">
+					<div id="footerText">&copy; Nazmus Nasir</div>
+				</div>
 	</div>
 </body>
 </html>
