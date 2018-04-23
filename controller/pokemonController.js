@@ -1,40 +1,37 @@
-var Pokemon = require('../model/pokemonModel');
+let Pokemon = require('../model/pokemonModel');
 
 class PokemonService {
-    static list(){
+
+    static listAll(){
         return Pokemon.find({})
             .then((pokemon) => {
                 return pokemon;
             });
     }
 
-    static listOne(id){
+    // Create a new document
+    static create(obj){
+        let entry = new Pokemon(obj);
+        return entry.save();
+    }
+
+    // Update one document
+    static change(id, data){
         return Pokemon.findOne({_id: id})
-            .then((pokemon) =>{
+            .then((pokemon) => {
+               pokemon.set(data);
+               pokemon.save();
                return pokemon;
             });
     }
 
-    static create(obj){
-        let pokemon = new Pokemon(obj)
-        return pokemon.save();
-    }
-
-    static update(id, data) {
-        return Pokemon.findOne({_id: id})
-            .then((pokemon) => {
-                pokemon.set(data);
-                pokemon.save();
-                return pokemon;
-            });
-    }
-
-    static delete(id) {
-        return Pokemon.findByIdAndRemove(id)
+    static delete(id){
+        return Pokemon.findByIdAndRemove({_id: id})
             .then((data) => {
-               return data;
+                return data;
             });
     }
+
 }
 
 module.exports.PokemonService = PokemonService;
