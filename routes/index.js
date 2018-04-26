@@ -6,7 +6,7 @@ let PokemonService = pokemonController.PokemonService;
 /* GET home page. */
 
 router.get('/', function(req, res, next) {
-    PokemonService.list()
+    PokemonService.listAll()
         .then((pokemon) =>{
             res.render('index', {
                 pokemon: pokemon

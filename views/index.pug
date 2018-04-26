@@ -2,7 +2,7 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+  p This page utilizes the GET Controller only! Add items to the list using the POST API and refresh this page to see them here.
 
   if pokemon
     each  val in pokemon
@@ -13,24 +13,24 @@ block content
             p <strong>Nickname</strong>: #{val.nickname}
             p <strong>Combat Power</strong>: #{val.combatPower || "None entered"}
             p <strong>HP</strong>: #{val.hp || "None entered"}
-            a.btn.btn-primary(href='/' + val._id) Edit
-            span &nbsp;
+            //a.btn.btn-primary(href='/' + val._id) Edit
+            //span &nbsp;
             //a.btn.btn-danger.deleteMe(data-delete=val._id) Delete
 
-  .row
-    .col-sm-12
-      form#list(method='post', action='/')
-        .form-group
-          label(for='name') Pokemon name:
-          input#name.form-control(type='text', name='name', placeholder="Pokemon", required="required")
-        .form-group
-          label(for='nickname') Nickname:
-          input#nickname.form-control(type='text', name='nickname', placeholder="Nickname", required="required")
-        .form-group
-          label(for='cp') Combat Power:
-          input#cp.form-control(type='number', name='cp', placeholder="CP", required="required")
-        .form-group
-          label(for='hp') HP:
-          input#hp.form-control(type='number', name='hp', placeholder="HP", required="required")
-        .form-group
-          button#submit(type='submit') Submit
+  //.row
+  //  .col-sm-12
+  //    form#list(method='post', action='/')
+  //      .form-group
+  //        label(for='name') Pokemon name:
+  //        input#name.form-control(type='text', name='name', placeholder="Pokemon", required="required")
+  //      .form-group
+  //        label(for='nickname') Nickname:
+  //        input#nickname.form-control(type='text', name='nickname', placeholder="Nickname", required="required")
+  //      .form-group
+  //        label(for='cp') Combat Power:
+  //        input#cp.form-control(type='number', name='cp', placeholder="CP", required="required")
+  //      .form-group
+  //        label(for='hp') HP:
+  //        input#hp.form-control(type='number', name='hp', placeholder="HP", required="required")
+  //      .form-group
+  //        button#submit(type='submit') Submit
