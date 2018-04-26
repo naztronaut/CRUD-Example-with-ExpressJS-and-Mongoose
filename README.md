@@ -1,5 +1,9 @@
 # CRUD API endpoints with ExpressJS
 
+## Tutorial
+You can find the step by step guide to this project at [http://104.236.81.16:3000/tutorial.html](http://104.236.81.16:3000/tutorial.html).
+
+
 ## Project Details
 This project was created as part of the graduate assignment for CSCI E-31 by Nazmus Nasir.
 
@@ -28,3 +32,8 @@ We will create a controller and API end points in an /api folder inside routes. 
 4. **DELETE** - delete a single document in a collection
 
 The READ API will read all data. There will a quick code snippet to read just one document inside the collection but won't be covered in the video.
+
+## Demo
+You can play with the demo API by hitting the following URL: [http://104.236.81.16:3000/api/pokemon](http://104.236.81.16:3000/api/pokemon).
+
+You can hit the base URL [http://104.236.81.16:3000](http://104.236.81.16:3000) to test the GET Controller. You can add items to the list using the POST API and refresh this page to see the magic.
